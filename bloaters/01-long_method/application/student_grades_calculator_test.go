@@ -1,6 +1,7 @@
-package _1_intro
+package application
 
 import (
+	"dasalgadoc.com/code_smell_go/bloaters/01-long_method/domain"
 	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"testing"
@@ -11,13 +12,13 @@ const MAX_GRADE = 10
 
 type studentGradeCalculatorTest struct {
 	test     *testing.T
-	grades   []grades
-	expected grades
-	result   grades
+	grades   []domain.Grades
+	expected domain.Grades
+	result   domain.Grades
 
-	teachers teacherExtraPoint
+	teachers domain.TeacherExtraPoint
 
-	studentGrade []StudentGrade
+	studentGrade []domain.StudentGrade
 }
 
 /*-- Feature 1: average --*/
@@ -36,7 +37,7 @@ func TestShouldReturnAverageOnASlicesOfNumber(t *testing.T) {
 func TestShouldReturnZeroOnEmptySlice(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
-	s.grades = []grades{}
+	s.grades = []domain.Grades{}
 	s.expected = 0
 
 	s.whenCalculateGrades()
@@ -64,14 +65,14 @@ func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReached(t *testing.T) 
 		s.givenASliceOfNumbers(l)
 		s.whenCalculateGradesMinimumReached(false)
 
-		assert.Equal(t, grades(0), s.result, "should return average on a slice of numbers")
+		assert.Equal(t, domain.Grades(0), s.result, "should return average on a slice of numbers")
 	}
 }
 
 func TestShouldReturnZeroOnEmptySliceMinimum(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
-	s.grades = []grades{}
+	s.grades = []domain.Grades{}
 	s.expected = 0
 
 	s.whenCalculateGradesMinimumReached(true)
@@ -118,14 +119,14 @@ func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReachedWeighted(t *tes
 		s.givenASliceOfStudentGrades(l.length, l.weight)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverage(false)
 
-		assert.Equal(t, grades(0), s.result, "should return average on a slice of grades")
+		assert.Equal(t, domain.Grades(0), s.result, "should return average on a slice of grades")
 	}
 }
 
 func TestShouldReturnZeroOnEmptySliceMinimumWeighted(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
-	s.studentGrade = []StudentGrade{}
+	s.studentGrade = []domain.StudentGrade{}
 	s.expected = 0
 
 	s.whenCalculateGradesMinimumReachedAndWeightedAverage(true)
@@ -231,36 +232,36 @@ func startStudentGradeCalculatorTest(t *testing.T) *studentGradeCalculatorTest {
 }
 
 func (s *studentGradeCalculatorTest) givenASliceOfNumbers(length int) {
-	var numbers []grades
-	var sumOfValues grades
+	var numbers []domain.Grades
+	var sumOfValues domain.Grades
 
 	for i := 0; i < length; i++ {
-		numbers = append(numbers, grades(rand.Int()))
+		numbers = append(numbers, domain.Grades(rand.Int()))
 		sumOfValues += numbers[i]
 	}
 
 	s.grades = numbers
-	s.expected = sumOfValues / grades(length)
+	s.expected = sumOfValues / domain.Grades(length)
 }
 
 func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weights []int) {
-	var studentGrades []StudentGrade
-	var sumOfValues grades
+	var studentGrades []domain.StudentGrade
+	var sumOfValues domain.Grades
 	var sumOfWeights int
 
 	for i := 0; i < length; i++ {
-		number := grades(rand.Intn(MAX_GRADE + 1))
+		number := domain.Grades(rand.Intn(MAX_GRADE + 1))
 		studentGrades = append(studentGrades,
-			StudentGrade{
-				value:  number,
-				weight: weights[i],
+			domain.StudentGrade{
+				Value:  number,
+				Weight: weights[i],
 			})
-		sumOfValues += number * grades(weights[i]) / 100
+		sumOfValues += number * domain.Grades(weights[i]) / 100
 		sumOfWeights += weights[i]
 	}
 
 	s.studentGrade = studentGrades
-	s.expected = sumOfValues / grades(length)
+	s.expected = sumOfValues / domain.Grades(length)
 
 	if sumOfWeights > 100 {
 		s.expected = -1
@@ -271,7 +272,7 @@ func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weig
 }
 
 func (s *studentGradeCalculatorTest) andThereIsAtTeacherExtraPointMap() {
-	s.teachers = make(teacherExtraPoint)
+	s.teachers = make(domain.TeacherExtraPoint)
 	s.teachers["teacher1"] = make(map[int]bool)
 	s.teachers["teacher2"] = make(map[int]bool)
 	startYear := time.Now().Year() - 2

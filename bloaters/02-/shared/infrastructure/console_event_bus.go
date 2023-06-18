@@ -1,7 +1,7 @@
 package infrastructure
 
 import (
-	"dasalgadoc.com/code_smell_go/bloaters/02-lonng_method/shared/domain"
+	"dasalgadoc.com/code_smell_go/bloaters/02-/shared/domain"
 	"fmt"
 )
 

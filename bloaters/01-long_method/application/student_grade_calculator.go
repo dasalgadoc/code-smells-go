@@ -1,21 +1,24 @@
-package _1_intro
+package application
 
-import "time"
+import (
+	"dasalgadoc.com/code_smell_go/bloaters/01-long_method/domain"
+	"time"
+)
 
 type studentGradeCalculator struct {
-	teacherExtraPoint teacherExtraPoint
+	teacherExtraPoint domain.TeacherExtraPoint
 }
 
-func NewStudentGradeCalculator(point teacherExtraPoint) *studentGradeCalculator {
+func NewStudentGradeCalculator(point domain.TeacherExtraPoint) *studentGradeCalculator {
 	return &studentGradeCalculator{
 		teacherExtraPoint: point,
 	}
 }
 
-func (s *studentGradeCalculator) calculateGrades(examsGrades []grades) grades {
+func (s *studentGradeCalculator) calculateGrades(examsGrades []domain.Grades) domain.Grades {
 	if !(len(examsGrades) == 0) {
-		var gradesSum grades
-		var gradesCount grades
+		var gradesSum domain.Grades
+		var gradesCount domain.Grades
 
 		for _, grade := range examsGrades {
 			gradesSum += grade
@@ -29,11 +32,11 @@ func (s *studentGradeCalculator) calculateGrades(examsGrades []grades) grades {
 }
 
 func (s *studentGradeCalculator) calculateGradesMinimumClasses(
-	examsGrades []grades,
-	hasReachMinimumGrades bool) grades {
+	examsGrades []domain.Grades,
+	hasReachMinimumGrades bool) domain.Grades {
 	if !(len(examsGrades) == 0) {
-		var gradesSum grades
-		var gradesCount grades
+		var gradesSum domain.Grades
+		var gradesCount domain.Grades
 
 		for _, grade := range examsGrades {
 			gradesSum += grade
@@ -51,16 +54,16 @@ func (s *studentGradeCalculator) calculateGradesMinimumClasses(
 	}
 }
 func (s *studentGradeCalculator) calculateGradesMinimumClassesAndWeightedAverage(
-	examsGrades []StudentGrade,
-	hasReachMinimumGrades bool) grades {
+	examsGrades []domain.StudentGrade,
+	hasReachMinimumGrades bool) domain.Grades {
 	if !(len(examsGrades) == 0) {
-		var gradesSum grades
-		var gradesCount grades
+		var gradesSum domain.Grades
+		var gradesCount domain.Grades
 		weightSum := 0
 
 		for _, grade := range examsGrades {
-			gradesSum += grade.value * grades(grade.weight) / 100
-			weightSum += grade.weight
+			gradesSum += grade.Value * domain.Grades(grade.Weight) / 100
+			weightSum += grade.Weight
 			gradesCount++
 		}
 
@@ -85,12 +88,12 @@ func (s *studentGradeCalculator) calculateGradesMinimumClassesAndWeightedAverage
 }
 
 func (s *studentGradeCalculator) calculateGradesMinimumClassesAndWeightedAverageWithExtraPoint(
-	examsGrades []StudentGrade,
+	examsGrades []domain.StudentGrade,
 	hasReachMinimumGrades bool,
-	teacher string) grades {
+	teacher string) domain.Grades {
 	if !(len(examsGrades) == 0) {
-		var gradesSum grades
-		var gradesCount grades
+		var gradesSum domain.Grades
+		var gradesCount domain.Grades
 		weightSum := 0
 		gotExtraPoint := false
 
@@ -102,8 +105,8 @@ func (s *studentGradeCalculator) calculateGradesMinimumClassesAndWeightedAverage
 		}
 
 		for _, grade := range examsGrades {
-			gradesSum += grade.value * grades(grade.weight) / 100
-			weightSum += grade.weight
+			gradesSum += grade.Value * domain.Grades(grade.Weight) / 100
+			weightSum += grade.Weight
 			gradesCount++
 		}
 

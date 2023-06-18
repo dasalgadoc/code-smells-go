@@ -1,6 +1,6 @@
 package domain
 
-import "dasalgadoc.com/code_smell_go/bloaters/02-lonng_method/shared/domain"
+import "dasalgadoc.com/code_smell_go/bloaters/02-/shared/domain"
 
 type Course struct {
 	aggregate domain.AggregateRoot
