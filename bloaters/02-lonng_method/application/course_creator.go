@@ -20,9 +20,10 @@ func (cc CourseCreator) Invoke() error {
 		return err
 	}
 
-	err = cc.repository.CreateCourse(*course)
+	err = cc.repository.SaveCourse(*course)
 	if err != nil {
 		return err
 	}
+
 	return cc.eventBus.PublishBulk(course.PullEvents())
 }
