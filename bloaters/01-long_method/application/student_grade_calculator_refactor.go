@@ -9,7 +9,13 @@ type studentGradeCalculatorRefactor struct {
 	teacherExtraPoint domain.TeacherExtraPoint
 }
 
-func (s *studentGradeCalculatorRefactor) calculateGradesMinimumClassesAndWeightedAverageWithExtraPoint(
+func NewStudentGradeCalculatorRefactor(point domain.TeacherExtraPoint) *studentGradeCalculatorRefactor {
+	return &studentGradeCalculatorRefactor{
+		teacherExtraPoint: point,
+	}
+}
+
+func (s *studentGradeCalculatorRefactor) calculateGradesRefactorOne(
 	examsGrades []domain.StudentGrade,
 	hasReachMinimumGrades bool,
 	teacher string) domain.Grades {

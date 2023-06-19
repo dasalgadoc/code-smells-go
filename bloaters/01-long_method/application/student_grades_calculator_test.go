@@ -45,7 +45,7 @@ func TestShouldReturnZeroOnEmptySlice(t *testing.T) {
 }
 
 /*-- Feature 2: minimum --*/
-func TestShouldReturnAverageOnASliceNumberWithMinimumClassReached(t *testing.T) {
+func TestShouldReturnAverageOnASliceNumberIfMinimumClassHasBeenReached(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []int{3, 5, 10, 20, 50, 100}
@@ -57,7 +57,7 @@ func TestShouldReturnAverageOnASliceNumberWithMinimumClassReached(t *testing.T) 
 	}
 }
 
-func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReached(t *testing.T) {
+func TestShouldReturnZeroOnASliceOfNumbersIfMinimumClassHasNoBeenReached(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []int{3, 5, 10, 20, 50, 100}
@@ -69,7 +69,7 @@ func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReached(t *testing.T) 
 	}
 }
 
-func TestShouldReturnZeroOnEmptySliceMinimum(t *testing.T) {
+func TestShouldReturnZeroOnEmptySliceWithAndWithoutMinimumReached(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	s.grades = []domain.Grades{}
@@ -123,7 +123,7 @@ func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReachedWeighted(t *tes
 	}
 }
 
-func TestShouldReturnZeroOnEmptySliceMinimumWeighted(t *testing.T) {
+func TestShouldReturnZeroOnEmptySliceWeightedStructure(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	s.studentGrade = []domain.StudentGrade{}
@@ -136,7 +136,7 @@ func TestShouldReturnZeroOnEmptySliceMinimumWeighted(t *testing.T) {
 	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
 }
 
-func TestShouldReturnAnErrorCodeWithWWeightedUnderOneHundred(t *testing.T) {
+func TestShouldReturnAnErrorCodeWithWeightedUnderOneHundred(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []struct {
@@ -156,7 +156,7 @@ func TestShouldReturnAnErrorCodeWithWWeightedUnderOneHundred(t *testing.T) {
 	}
 }
 
-func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundred(t *testing.T) {
+func TestShouldReturnAnErrorCodeWithWeightedOverOneHundred(t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []struct {
@@ -177,7 +177,8 @@ func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundred(t *testing.T) {
 }
 
 /*-- Feature 4: weighted with teachers --*/
-func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListNoExtraPoint(t *testing.T) {
+func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListNoExtraPoint(
+	t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []struct {
@@ -198,7 +199,8 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 	}
 }
 
-func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListExtraPoint(t *testing.T) {
+func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListExtraPoint(
+	t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []struct {
@@ -220,7 +222,8 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 	}
 }
 
-func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithTeachersListExtraPoint(t *testing.T) {
+func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithTeachersListExtraPoint(
+	t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
 
 	lengths := []struct {
@@ -296,6 +299,131 @@ func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListExtraPoint
 }
 
 // Upper test repeated with teachers list...
+
+/*-- Feature 5: Refactors */
+func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListNoExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{30, 30, 40}},
+		{5, []int{10, 20, 30, 20, 20}},
+		{10, []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.andThereIsAtTeacherExtraPointMap()
+		s.whenCalculateGradesRefactor(true, "teacher2", 1)
+
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{30, 30, 40}},
+		{5, []int{10, 20, 30, 20, 20}},
+		{10, []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.andThereIsAtTeacherExtraPointMap()
+		s.whenCalculateGradesRefactor(true, "teacher1", 1)
+
+		s.expected += 1
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithTeachersListExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{30, 30, 40}},
+		{5, []int{10, 20, 30, 20, 20}},
+		{10, []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.andThereIsAtTeacherExtraPointMap()
+		s.whenCalculateGradesRefactor(false, "teacher1", 1)
+
+		s.expected = 0
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestRefactorShouldReturnZeroOnEmptySliceMinimumWeightedTeacherListExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	s.studentGrade = []domain.StudentGrade{}
+	s.expected = 0
+
+	s.whenCalculateGradesRefactor(true, "teacher1", 1)
+	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
+
+	s.whenCalculateGradesRefactor(false, "teacher2", 1)
+	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
+}
+
+func TestRefactorShouldReturnAnErrorCodeWithWWeightedUnderOneHundredTeacherListExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{20, 20, 30}},
+		{5, []int{9, 20, 30, 20, 20}},
+		{10, []int{0, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.whenCalculateGradesRefactor(true, "teacher2", 1)
+
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestRefactorShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListExtraPoint(
+	t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{40, 40, 40}},
+		{5, []int{11, 20, 30, 20, 20}},
+		{10, []int{20, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.whenCalculateGradesRefactor(true, "teacher1", 1)
+
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
 
 /*-- steps ---*/
 func startStudentGradeCalculatorTest(t *testing.T) *studentGradeCalculatorTest {
@@ -375,5 +503,17 @@ func (s *studentGradeCalculatorTest) whenCalculateGradesMinimumReachedAndWeighte
 func (s *studentGradeCalculatorTest) whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(
 	hasReachMinimum bool, teacher string) {
 	target := NewStudentGradeCalculator(s.teachers)
-	s.result = target.calculateGradesMinimumClassesAndWeightedAverageWithExtraPoint(s.studentGrade, hasReachMinimum, teacher)
+	s.result = target.calculateGradesMinimumClassesAndWeightedAverageWithExtraPoint(
+		s.studentGrade, hasReachMinimum, teacher)
+}
+
+func (s *studentGradeCalculatorTest) whenCalculateGradesRefactor(
+	hasReachMinimum bool, teacher string, refactor int) {
+	target := NewStudentGradeCalculatorRefactor(s.teachers)
+	switch refactor {
+	case 1:
+		s.result = target.calculateGradesRefactorOne(s.studentGrade, hasReachMinimum, teacher)
+	default:
+		s.result = 0
+	}
 }
