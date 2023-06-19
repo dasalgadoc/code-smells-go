@@ -202,3 +202,5 @@ if s.hasToIncreaseOneExtraPoint(teacher) {
 	// ...
 }
 ```
+3. Go step by step, run your tests and check if everything is ok. Then commit your changes.
+4. Repeat the process until you have a clean code.
