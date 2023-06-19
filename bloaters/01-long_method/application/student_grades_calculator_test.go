@@ -220,6 +220,81 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 	}
 }
 
+func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithTeachersListExtraPoint(t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{30, 30, 40}},
+		{5, []int{10, 20, 30, 20, 20}},
+		{10, []int{10, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.andThereIsAtTeacherExtraPointMap()
+		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(false, "teacher1")
+
+		s.expected = 0
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestShouldReturnZeroOnEmptySliceMinimumWeightedTeacherListExtraPoint(t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	s.studentGrade = []domain.StudentGrade{}
+	s.expected = 0
+
+	s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher1")
+	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
+
+	s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(false, "teacher2")
+	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
+}
+
+func TestShouldReturnAnErrorCodeWithWWeightedUnderOneHundredTeacherListExtraPoint(t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{20, 20, 30}},
+		{5, []int{9, 20, 30, 20, 20}},
+		{10, []int{0, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher2")
+
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
+func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListExtraPoint(t *testing.T) {
+	s := startStudentGradeCalculatorTest(t)
+
+	lengths := []struct {
+		length int
+		weight []int
+	}{
+		{3, []int{40, 40, 40}},
+		{5, []int{11, 20, 30, 20, 20}},
+		{10, []int{20, 10, 10, 10, 10, 10, 10, 10, 10, 10}},
+	}
+
+	for _, l := range lengths {
+		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher1")
+
+		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
+	}
+}
+
 // Upper test repeated with teachers list...
 
 /*-- steps ---*/

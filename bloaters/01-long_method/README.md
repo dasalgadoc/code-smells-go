@@ -179,3 +179,8 @@ So, our simply average function growth enough and someday we will death for tech
 ## 🤷🏻‍♀️ Issues
 
 ## 🧑🏻‍🔬 Refactoring
+
+
+1. Check the test
+2. Extract methods
+3. 
