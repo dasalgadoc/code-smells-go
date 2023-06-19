@@ -10,7 +10,7 @@
 
 ## 💠 This Code
 
-See the students_grade_calculator.go file for view a code with Long method code smell.
+See the `students_grade_calculator.go` file for view a code with Long method code smell.
 
 All starts with a simple feature, an average:
 ```go
@@ -175,8 +175,6 @@ Consider the following aspects:
 - If the teacher gives an extra point, the average is the average plus one.
 
 So, our simply average function growth enough and someday we will death for technical debt.
-
-## 🤷🏻‍♀️ Issues
 
 ## 🧑🏻‍🔬 Refactoring
 

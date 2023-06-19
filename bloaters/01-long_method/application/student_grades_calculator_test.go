@@ -192,7 +192,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher2")
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -214,7 +214,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher1")
 
 		s.expected += 1
@@ -237,7 +237,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithT
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(false, "teacher1")
 
 		s.expected = 0
@@ -318,7 +318,7 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReache
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesRefactor(true, "teacher2", refactorNumber)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -340,7 +340,7 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReache
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesRefactor(true, "teacher1", refactorNumber)
 
 		s.expected += 1
@@ -363,7 +363,7 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReac
 
 	for _, l := range lengths {
 		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
-		s.andThereIsAtTeacherExtraPointMap()
+		s.andThereIsATeacherExtraPointMap()
 		s.whenCalculateGradesRefactor(false, "teacher1", refactorNumber)
 
 		s.expected = 0
@@ -479,7 +479,7 @@ func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weig
 	}
 }
 
-func (s *studentGradeCalculatorTest) andThereIsAtTeacherExtraPointMap() {
+func (s *studentGradeCalculatorTest) andThereIsATeacherExtraPointMap() {
 	s.teachers = make(domain.TeacherExtraPoint)
 	s.teachers["teacher1"] = make(map[int]bool)
 	s.teachers["teacher2"] = make(map[int]bool)
