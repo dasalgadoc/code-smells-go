@@ -96,7 +96,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReached(t *tes
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverage(true)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -116,7 +116,7 @@ func TestShouldReturnZeroOnASliceNumberWithoutMinimumClassReachedWeighted(t *tes
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverage(false)
 
 		assert.Equal(t, domain.Grades(0), s.result, "should return average on a slice of grades")
@@ -149,7 +149,7 @@ func TestShouldReturnAnErrorCodeWithWeightedUnderOneHundred(t *testing.T) {
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverage(true)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -169,7 +169,7 @@ func TestShouldReturnAnErrorCodeWithWeightedOverOneHundred(t *testing.T) {
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverage(true)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -191,7 +191,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.andThereIsAtTeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher2")
 
@@ -213,7 +213,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTea
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.andThereIsAtTeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher1")
 
@@ -236,7 +236,7 @@ func TestShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReachedWithT
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.andThereIsAtTeacherExtraPointMap()
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(false, "teacher1")
 
@@ -271,7 +271,7 @@ func TestShouldReturnAnErrorCodeWithWWeightedUnderOneHundredTeacherListExtraPoin
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher2")
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -291,7 +291,7 @@ func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListExtraPoint
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, 0)
 		s.whenCalculateGradesMinimumReachedAndWeightedAverageAndTeachers(true, "teacher1")
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -300,7 +300,9 @@ func TestShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListExtraPoint
 
 // Upper test repeated with teachers list...
 
-/*-- Feature 5: Refactors */
+/*-- Feature 5: Refactors: Numbers between 1 and 5 */
+var refactorNumber int = 5
+
 func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReachedWithTeachersListNoExtraPoint(
 	t *testing.T) {
 	s := startStudentGradeCalculatorTest(t)
@@ -315,9 +317,9 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReache
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
 		s.andThereIsAtTeacherExtraPointMap()
-		s.whenCalculateGradesRefactor(true, "teacher2", 2)
+		s.whenCalculateGradesRefactor(true, "teacher2", refactorNumber)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
 	}
@@ -337,9 +339,9 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassReache
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
 		s.andThereIsAtTeacherExtraPointMap()
-		s.whenCalculateGradesRefactor(true, "teacher1", 2)
+		s.whenCalculateGradesRefactor(true, "teacher1", refactorNumber)
 
 		s.expected += 1
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -360,9 +362,9 @@ func TestRefactorShouldReturnWeightedAverageOnASliceNumberWithMinimumClassNoReac
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
+		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
 		s.andThereIsAtTeacherExtraPointMap()
-		s.whenCalculateGradesRefactor(false, "teacher1", 2)
+		s.whenCalculateGradesRefactor(false, "teacher1", refactorNumber)
 
 		s.expected = 0
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
@@ -376,10 +378,10 @@ func TestRefactorShouldReturnZeroOnEmptySliceMinimumWeightedTeacherListExtraPoin
 	s.studentGrade = []domain.StudentGrade{}
 	s.expected = 0
 
-	s.whenCalculateGradesRefactor(true, "teacher1", 2)
+	s.whenCalculateGradesRefactor(true, "teacher1", refactorNumber)
 	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
 
-	s.whenCalculateGradesRefactor(false, "teacher2", 2)
+	s.whenCalculateGradesRefactor(false, "teacher2", refactorNumber)
 	assert.Equal(t, s.expected, s.result, "should return zero on empty slice")
 }
 
@@ -397,8 +399,8 @@ func TestRefactorShouldReturnAnErrorCodeWithWWeightedUnderOneHundredTeacherListE
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
-		s.whenCalculateGradesRefactor(true, "teacher2", 2)
+		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
+		s.whenCalculateGradesRefactor(true, "teacher2", refactorNumber)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
 	}
@@ -418,8 +420,8 @@ func TestRefactorShouldReturnAnErrorCodeWithWWeightedOverOneHundredTeacherListEx
 	}
 
 	for _, l := range lengths {
-		s.givenASliceOfStudentGrades(l.length, l.weight)
-		s.whenCalculateGradesRefactor(true, "teacher1", 1)
+		s.givenASliceOfStudentGrades(l.length, l.weight, refactorNumber)
+		s.whenCalculateGradesRefactor(true, "teacher1", refactorNumber)
 
 		assert.Equal(t, s.expected, s.result, "should return average on a slice of grades")
 	}
@@ -447,7 +449,7 @@ func (s *studentGradeCalculatorTest) givenASliceOfNumbers(length int) {
 	s.expected = sumOfValues / domain.Grades(length)
 }
 
-func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weights []int) {
+func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weights []int, refactor int) {
 	var studentGrades []domain.StudentGrade
 	var sumOfValues domain.Grades
 	var sumOfWeights int
@@ -471,6 +473,9 @@ func (s *studentGradeCalculatorTest) givenASliceOfStudentGrades(length int, weig
 	}
 	if sumOfWeights < 100 {
 		s.expected = -2
+	}
+	if sumOfWeights != 100 && refactor > 3 {
+		s.expected = 0
 	}
 }
 
@@ -516,6 +521,12 @@ func (s *studentGradeCalculatorTest) whenCalculateGradesRefactor(
 		s.result = target.calculateGradesRefactorOne(s.studentGrade, hasReachMinimum, teacher)
 	case 2:
 		s.result = target.calculateGradesRefactorTwo(s.studentGrade, hasReachMinimum, teacher)
+	case 3:
+		s.result = target.calculateGradesRefactorThree(s.studentGrade, hasReachMinimum, teacher)
+	case 4:
+		s.result, _ = target.calculateGradesRefactorFour(s.studentGrade, hasReachMinimum, teacher)
+	case 5:
+		s.result, _ = target.calculateGradesRefactorFive(s.studentGrade, hasReachMinimum, teacher)
 	default:
 		s.result = 0
 	}

@@ -204,3 +204,7 @@ if s.hasToIncreaseOneExtraPoint(teacher) {
 ```
 3. Go step by step, run your tests and check if everything is ok. Then commit your changes.
 4. Repeat the process until you have a clean code.
+5. Check for guard clauses and remove indentation [see more](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html).
+6. Segregate the functionality and the error handling
+7. Simplify error handling using domain knowledge ☆
+8. Minimize the number of return statements
