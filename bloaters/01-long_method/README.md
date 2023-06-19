@@ -183,4 +183,22 @@ So, our simply average function growth enough and someday we will death for tech
 
 1. Check the test
 2. Extract methods
-3. 
+    Consists in take a part of the code and put it in a new method, with a good name.
+    
+    Checking if the teacher gives an extra point (extract method):
+
+```go
+func (s *studentGradeCalculatorRefactor) hasToIncreaseOneExtraPoint(teacher string) bool {
+    // ...
+}
+```
+
+3. Inline methods
+    Consists in take a method and put it in the place where it is called.
+    
+    Checking if the teacher gives an extra point (inline method):
+```go
+if s.hasToIncreaseOneExtraPoint(teacher) {
+	// ...
+}
+```
