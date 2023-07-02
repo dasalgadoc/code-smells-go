@@ -33,10 +33,5 @@ func (s *studentGradeCalculatorRefactor) Do(
 		return 0, err
 	}
 
-	var average domain.NumericGrade
-	if s.teachersExtraPoint.GetExtraPoint(teacher, CurrentYear()) {
-		average = 1
-	}
-	average += g.CalculateAverage()
-	return average, nil
+	return g.CalculateAverage() + s.teachersExtraPoint.GetExtraPoint(teacher, CurrentYear()), nil
 }
