@@ -13,6 +13,8 @@ See the `students_grade_calculator.go` file for view a code with Long class code
 - Check for errors
 - Increment extra points
 
+We can split responsibilities to models
+
 ```go
 ```
 
