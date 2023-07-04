@@ -1,38 +1,38 @@
 package domain
 
 import (
-	"dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/customer/domain"
-	domain3 "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/discounts/domain"
-	domain2 "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
-	domain4 "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/taxes/domain"
+	customers "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/customer/domain"
+	discounts "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/discounts/domain"
+	shared "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
+	taxes "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/taxes/domain"
 )
 
 type Booking struct {
 	bookingID     BookingID
-	startDate     domain2.LocalDateTime
-	endDate       domain2.LocalDateTime
-	customerId    domain.CustomerID
-	customerName  domain.CustomerName
-	customerEmail domain.EmailAddress
+	startDate     shared.LocalDateTime
+	endDate       shared.LocalDateTime
+	customerId    customers.CustomerID
+	customerName  customers.CustomerName
+	customerEmail customers.EmailAddress
 	bookingType   BookingType
-	discountType  domain3.DiscountType
-	discountValue domain3.DiscountValue
-	taxType       domain4.TaxType
-	taxValue      domain4.TaxValue
+	discountType  discounts.DiscountType
+	discountValue discounts.DiscountValue
+	taxType       taxes.TaxType
+	taxValue      taxes.TaxValue
 }
 
 func NewBooking(
 	bookingID BookingID,
-	startDate domain2.LocalDateTime,
-	endDate domain2.LocalDateTime,
-	customerId domain.CustomerID,
-	customerName domain.CustomerName,
-	customerEmail domain.EmailAddress,
+	startDate shared.LocalDateTime,
+	endDate shared.LocalDateTime,
+	customerId customers.CustomerID,
+	customerName customers.CustomerName,
+	customerEmail customers.EmailAddress,
 	bookingType BookingType,
-	discountType domain3.DiscountType,
-	discountValue domain3.DiscountValue,
-	taxType domain4.TaxType,
-	taxValue domain4.TaxValue,
+	discountType discounts.DiscountType,
+	discountValue discounts.DiscountValue,
+	taxType taxes.TaxType,
+	taxValue taxes.TaxValue,
 ) Booking {
 	return Booking{
 		bookingID:     bookingID,
@@ -52,10 +52,10 @@ func NewBooking(
 func NewBookingRefactor(
 	bookingID BookingID,
 	bookingType BookingType,
-	bookingPeriod domain2.DateRange,
-	customer domain.Customer,
-	discount domain3.Discount,
-	tax domain4.Tax) Booking {
+	bookingPeriod shared.DateRange,
+	customer customers.Customer,
+	discount discounts.Discount,
+	tax taxes.Tax) Booking {
 	return Booking{
 		bookingID:     bookingID,
 		startDate:     bookingPeriod.StartDate(),
