@@ -1,9 +1,11 @@
 package domain
 
-import "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
+import (
+	shared "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
+)
 
 type CustomerID struct {
-	value domain.UUIDValueObject
+	value shared.UUIDValueObject
 }
 
 func (c *CustomerID) Value() string {
@@ -11,7 +13,7 @@ func (c *CustomerID) Value() string {
 }
 
 func NewCustomerID() (*CustomerID, error) {
-	id, err := domain.NewUUIDValueObject()
+	id, err := shared.NewUUIDValueObject()
 	if err != nil {
 		return nil, err
 	}
@@ -19,7 +21,7 @@ func NewCustomerID() (*CustomerID, error) {
 }
 
 func NewCustomerIDFromString(id string) (*CustomerID, error) {
-	uid, err := domain.NewUUIDValueObjectFromString(id)
+	uid, err := shared.NewUUIDValueObjectFromString(id)
 	if err != nil {
 		return nil, err
 	}
