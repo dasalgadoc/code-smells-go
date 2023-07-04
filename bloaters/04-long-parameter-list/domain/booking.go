@@ -41,3 +41,25 @@ func NewBooking(
 		taxValue:      taxValue,
 	}
 }
+
+func NewBookingRefactor(
+	bookingID BookingID,
+	bookingType BookingType,
+	bookingPeriod DateRange,
+	customer Customer,
+	discount Discount,
+	tax Tax) Booking {
+	return Booking{
+		bookingID:     bookingID,
+		startDate:     bookingPeriod.StartDate(),
+		endDate:       bookingPeriod.EndDate(),
+		bookingType:   bookingType,
+		customerId:    customer.CustomerId(),
+		customerName:  customer.CustomerName(),
+		customerEmail: customer.CustomerEmail(),
+		discountType:  discount.DiscountType(),
+		discountValue: discount.DiscountValue(),
+		taxType:       tax.TaxType(),
+		taxValue:      tax.TaxValue(),
+	}
+}

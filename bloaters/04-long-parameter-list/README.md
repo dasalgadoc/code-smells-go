@@ -8,4 +8,4 @@
 
 ## 🧑🏻‍🔬 Refactoring
 
-- Extract the method to a new struct and pass the struct as a parameter, this struct must group parameters.
+- Extract the method to a new struct and pass the struct as a parameter, this struct must group parameters using ubiquitous language.
