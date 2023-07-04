@@ -21,6 +21,16 @@ type Booking struct {
 	taxValue      taxes.TaxValue
 }
 
+func (b *Booking) StatusFor(date shared.LocalDateTime) BookingStatus {
+	if date.IsBefore(b.startDate) {
+		return BookingStatusNotStart
+	}
+	if date.IsBetween(b.startDate, b.endDate) {
+		return BookingStatusActive
+	}
+	return BookingStatusFinished
+}
+
 func NewBooking(
 	bookingID BookingID,
 	startDate shared.LocalDateTime,

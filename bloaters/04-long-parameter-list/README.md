@@ -75,3 +75,37 @@ func NewBookingRefactor(
 
 But, we can go further, pushing the logic.
 
+1. Imagine, that is necessary create logic to calculate the status of the Booking base on a Date, with the current structure are coupling to Value Object.
+
+```go
+type LocalDateTime struct {
+    value time.Time
+}
+
+func (b *Booking) StatusFor(date shared.LocalDateTime) BookingStatus {
+    if date.IsBefore(b.startDate) {
+        return BookingStatusNotStart
+    }
+    if date.IsBetween(b.startDate, b.endDate) {
+        return BookingStatusActive
+    }
+    return BookingStatusFinished
+}
+```
+
+Making our data ranges aggregate meaningless, so we can push the logic to the aggregate. (See `booking_refactor.go`)
+And We are not complying with tell, don´t ask principle because we are getting data to validate logic, instated of asking the object to do the logic.
+
+```go
+func (b *BookingRefactor) StatusFor(date shared.LocalDateTime) BookingStatus {
+    if b.bookingPeriod.HasStarted(date) {
+        return BookingStatusNotStart
+    }
+    if b.bookingPeriod.IsBetween(date) {
+        return BookingStatusActive
+    }
+    return BookingStatusFinished
+}
+```
+
+Appreciate the semantics!
