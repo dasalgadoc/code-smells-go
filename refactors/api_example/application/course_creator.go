@@ -1,21 +1,21 @@
 package application
 
 import (
-	domain2 "dasalgadoc.com/code_smell_go/02-/domain"
-	shared "dasalgadoc.com/code_smell_go/02-/shared/domain"
+	"dasalgadoc.com/code_smell_go/refactors/api_example/domain"
+	shared "dasalgadoc.com/code_smell_go/refactors/api_example/shared/domain"
 )
 
 type CourseCreator struct {
-	repository domain2.CourseRepository
+	repository domain.CourseRepository
 	eventBus   shared.EventBus
 }
 
-func NewCourseCreator(repository domain2.CourseRepository) *CourseCreator {
+func NewCourseCreator(repository domain.CourseRepository) *CourseCreator {
 	return &CourseCreator{repository: repository}
 }
 
 func (cc CourseCreator) Invoke() error {
-	course, err := domain2.CreateCourse()
+	course, err := domain.CreateCourse()
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,8 @@
 package domain
 
-import shared "dasalgadoc.com/code_smell_go/02-/shared/domain"
+import (
+	shared "dasalgadoc.com/code_smell_go/refactors/api_example/shared/domain"
+)
 
 type Course struct {
 	courseId shared.UUIDValueObject

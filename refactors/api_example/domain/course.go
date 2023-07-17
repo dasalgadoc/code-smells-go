@@ -1,11 +1,11 @@
 package domain
 
 import (
-	domain2 "dasalgadoc.com/code_smell_go/02-/shared/domain"
+	"dasalgadoc.com/code_smell_go/refactors/api_example/shared/domain"
 )
 
 type Course struct {
-	aggregate domain2.AggregateRoot
+	aggregate domain.AggregateRoot
 	id        *CourseId
 }
 
@@ -13,7 +13,7 @@ func (c *Course) Id() string {
 	return c.id.Value()
 }
 
-func (c *Course) PullEvents() []domain2.DomainEvent {
+func (c *Course) PullEvents() []domain.DomainEvent {
 	return c.aggregate.PullEvents()
 }
 
@@ -23,7 +23,7 @@ func CreateCourse() (*Course, error) {
 		return nil, err
 	}
 	course := &Course{
-		aggregate: *domain2.NewAggregateRoot(),
+		aggregate: *domain.NewAggregateRoot(),
 		id:        id,
 	}
 	course.aggregate.RecordEvent(NewCourseCreated(course.Id()))

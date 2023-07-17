@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"dasalgadoc.com/code_smell_go/02-/shared/domain"
+	"dasalgadoc.com/code_smell_go/refactors/api_example/shared/domain"
 )
 
 type CourseId struct {
