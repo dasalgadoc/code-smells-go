@@ -1,7 +1,7 @@
 package domain
 
 import (
-	shared "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
+	shared "dasalgadoc.com/code_smell_go/bloaters/04-long_parameter_list/shared/domain"
 )
 
 type BookingID struct {

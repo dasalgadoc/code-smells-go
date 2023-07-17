@@ -1,7 +1,7 @@
 package infrastructure
 
 import (
-	"dasalgadoc.com/code_smell_go/bloaters/05-data-clumps/domain"
+	"dasalgadoc.com/code_smell_go/bloaters/05-data_clumps/domain"
 	"database/sql"
 	"fmt"
 

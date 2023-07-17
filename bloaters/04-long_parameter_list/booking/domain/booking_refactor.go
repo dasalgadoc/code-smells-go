@@ -1,10 +1,10 @@
 package domain
 
 import (
-	customers "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/customer/domain"
-	discounts "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/discounts/domain"
-	shared "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/shared/domain"
-	taxes "dasalgadoc.com/code_smell_go/bloaters/04-long-parameter-list/taxes/domain"
+	customers "dasalgadoc.com/code_smell_go/bloaters/04-long_parameter_list/customer/domain"
+	discounts "dasalgadoc.com/code_smell_go/bloaters/04-long_parameter_list/discounts/domain"
+	shared "dasalgadoc.com/code_smell_go/bloaters/04-long_parameter_list/shared/domain"
+	taxes "dasalgadoc.com/code_smell_go/bloaters/04-long_parameter_list/taxes/domain"
 )
 
 type BookingRefactor struct {

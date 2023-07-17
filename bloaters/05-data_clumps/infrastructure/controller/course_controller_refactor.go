@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"dasalgadoc.com/code_smell_go/bloaters/05-data-clumps/application"
-	"dasalgadoc.com/code_smell_go/bloaters/05-data-clumps/infrastructure/dto"
+	"dasalgadoc.com/code_smell_go/bloaters/05-data_clumps/application"
+	"dasalgadoc.com/code_smell_go/bloaters/05-data_clumps/infrastructure/dto"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
