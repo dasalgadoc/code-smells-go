@@ -1,23 +1,22 @@
-package application
+package infrastructure
 
 import (
-	"dasalgadoc.com/code_smell_go/change_preventers/intro/infrastructure"
 	"dasalgadoc.com/code_smell_go/change_preventers/intro/infrastructure/dto"
 	"encoding/json"
 	"strconv"
 )
 
-type StepsCalculator struct {
-	csvImporter infrastructure.CsvImporter
+type StepsCalculatorController struct {
+	csvImporter CsvImporter
 }
 
-func NewStepsCalculator(csvImporter infrastructure.CsvImporter) *StepsCalculator {
-	return &StepsCalculator{
+func NewStepsCalculatorController(csvImporter CsvImporter) *StepsCalculatorController {
+	return &StepsCalculatorController{
 		csvImporter: csvImporter,
 	}
 }
 
-func (s *StepsCalculator) Get(courseId string) (*string, error) {
+func (s *StepsCalculatorController) Get(courseId string) (*string, error) {
 	table, err := s.csvImporter.Get(courseId)
 	if err != nil {
 		return nil, err
