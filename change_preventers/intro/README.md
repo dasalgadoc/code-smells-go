@@ -14,5 +14,3 @@ Responsibility of this method:
 
 No apply the Single Responsibility Principle (SRP) can result on smell change preventers.
 
-## 🧑🏻‍🔬 Refactoring
-
